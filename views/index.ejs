@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <% for (var i = 0; i<title.length; i++){ %>
+    <div class="blogs"  onclick="renderMain(<%= i %>)">
+        <div class="blog">
+            <h2 class="blog_title"><%= title[i] %></h2>
+            <p class="blog_content"><%= content[i] %></p>
+        </div>
+        <% } %>
+    </div>
+    <button type="submit" class="add_button">+</button>
+</body>
+</html>
