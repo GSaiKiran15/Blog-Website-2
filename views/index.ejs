@@ -9,13 +9,24 @@
 <body>
     <%- include("partials/header.ejs") %>
     <% for (var i = 0; i<title.length; i++){ %>
-    <div class="blogs"  onclick="renderMain(<%= i %>)">
+    <div class="blogs">
         <div class="blog">
             <h2 class="blog_title"><%= title[i] %></h2>
-            <p class="blog_content"><%= content[i] %></p>
+            <p class="blog_contetnt">
+                <% if (content[i].length<100) { %>
+                    <%= content[i] %>
+                        <% } else { %>
+                            <% let s=content[i].slice(0,100) %>
+                                <%= s %> <a href="/<%= title[i] %>"> <button id="read_button">Read
+                                            More...</button></a>
+                                    <% } %>
+
+                                </p>
         </div>
         <% } %>
     </div>
-    <button type="submit" class="add_button">+</button>
+    <div class="csubmit">
+        <a href="/upload"> <button id="compose_button">Compose</button></a>
+    </div>
 </body>
 </html>

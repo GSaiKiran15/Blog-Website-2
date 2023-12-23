@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express()
 
 let titles = ["avvakaya badda", "o"]
-let contents = ["salaar", "p"]
+let contents = ["salaar", "pLorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, in cupiditate repellat fugit labore excepturi veniam consequatur. Laborum reprehenderit incidunt culpa fuga doloremque tempore voluptatum accusantium repudiandae ipsa esse. Quia."]
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"))
@@ -19,15 +19,24 @@ app.get("/", (req, res) => {
     })
 })
 
-function renderMain(i){
-    app.get("/", (req, res) => {
-        res.render("content.ejs", {
-            "title":titles[i],
-        "content": contents[i]
-        })
-    })
-}
+app.get("/upload", (req, res) => {
+    res.render("upload.ejs")
+})
 
-app.listen(3000, () => {
-    console.log("3000 OK");
+app.get("/content", (req, res) => {
+    res.render("content.ejs")
+})
+
+app.get("/:title", (req, res) => {
+    res.render("content.ejs", {title:req.params.title ,content: req.params.content})
+})
+
+app.post("/", (req, res) => {
+    titles.push(req.body.title_name);
+    contents.push(req.body.content_info)
+    res.redirect("/")
+})
+
+app.listen(2000, () => {
+    console.log("2000 OK");
 })
